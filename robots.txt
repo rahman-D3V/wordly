@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wordly.app/sitemap.xml
+Sitemap: https://draftly-v1.vercel.app/sitemap.xml
