@@ -821,174 +821,164 @@ kbd {
 }
 
 /* =============================================
-   RESPONSIVE — Tablet landscape (≤ 1024px)
+   RESPONSIVE — Tablet (≤ 1024px)
    ============================================= */
 @media (max-width: 1024px) {
-  :root { --sidebar-w: 230px; }
-
+  :root { --sidebar-w: 220px; }
   .app-shell { padding: 0 16px; }
-
-  .seo-inner {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px 32px;
-  }
+  .seo-inner { grid-template-columns: repeat(2, 1fr); gap: 28px 32px; }
 }
 
 /* =============================================
-   RESPONSIVE — Tablet portrait (≤ 768px)
+   RESPONSIVE — Mobile (≤ 768px)
+   Everything stacks into one column, no side-by-side grids
    ============================================= */
 @media (max-width: 768px) {
-  /* Stack into single column */
+
+  /* Kill horizontal scroll globally */
+  html, body { overflow-x: hidden; max-width: 100%; }
+
+  /* Single column, full width */
   .app-shell {
     grid-template-columns: 1fr;
     padding: 0 16px;
+    width: 100%;
   }
 
   .workspace {
-    padding: 20px 0 0;
+    padding: 18px 0 0;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
   }
 
-  /* Sidebar: flat card grid below editor */
+  /* Sidebar resets — pure vertical stack */
   .sidebar {
     position: static;
     max-height: none;
     border-left: none;
     border-top: 1px solid var(--border);
-    padding: 20px 0 24px;
+    padding: 0 0 24px;
     overflow: visible;
-    /* Reset flex to normal flow */
     display: flex;
     flex-direction: column;
-    gap: 0;
-  }
-
-  /* Analysis + Time side by side via sidebar-grid, Density full width below */
-  .sidebar-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 20px;
     width: 100%;
   }
 
-  .sidebar-grid .sidebar-section {
-    border-bottom: none;
-    border-right: 1px solid var(--border);
-    padding-right: 12px;
-  }
-  .sidebar-grid .sidebar-section:last-child {
-    border-right: none;
-    padding-right: 0;
-    padding-left: 12px;
+  /* sidebar-grid: single column on mobile, no 2-col */
+  .sidebar-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
-  .time-cards {
-    grid-template-columns: 1fr 1fr;
+  .sidebar-section {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
   }
+  .sidebar-section:last-child { border-bottom: none; }
 
-  .editor { height: 300px; max-height: 45vh; }
-
-  .action-hint { display: none; }
-
-  .seo-inner {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 28px;
-    padding: 40px 0 32px;
-  }
-
-  .footer-note { display: none; }
-}
-
-/* =============================================
-   RESPONSIVE — Mobile large (≤ 600px)
-   ============================================= */
-@media (max-width: 600px) {
-  .app-shell { padding: 0 14px; }
-
-  .workspace { padding: 16px 0 0; gap: 14px; }
-
-  .workspace-title { font-size: 16px; }
-  .workspace-sub   { font-size: 12px; }
-
-  .editor {
-    height: 260px;
-    max-height: 42vh;
-    font-size: 15px;
-    padding: 16px 16px 10px;
-  }
-
-  /* Stats: 2-col grid for analysis rows */
+  /* Stat list: single column */
   .stat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+  }
+
+  .stat-row { width: 100%; padding: 9px 8px; }
+
+  /* Time cards: 2 equal columns */
+  .time-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px;
+    gap: 8px;
+    width: 100%;
   }
 
-  .stat-row { padding: 8px 8px; }
-  .stat-val  { font-size: 13px; }
-  .stat-name { font-size: 12px; }
-  .stat-sub  { font-size: 9px; }
+  /* Editor */
+  .editor {
+    height: 260px;
+    max-height: 40vh;
+    font-size: 15px;
+    padding: 16px 16px 10px;
+    resize: none;
+  }
 
-  .time-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .time-card-value { font-size: 18px; }
-
-  .action-bar { gap: 10px; }
-  .action-group { width: 100%; }
+  /* Buttons: full width row */
+  .action-hint { display: none; }
+  .action-group { width: 100%; gap: 8px; }
   .btn {
     flex: 1;
     justify-content: center;
-    padding: 11px 14px;
-    font-size: 13.5px;
+    padding: 12px 10px;
+    font-size: 14px;
   }
 
+  /* SEO: single column, no overflow */
+  .seo-section { overflow: hidden; }
   .seo-inner {
     grid-template-columns: 1fr;
-    padding: 32px 0 24px;
-    gap: 20px;
+    padding: 32px 20px 28px;
+    gap: 22px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .seo-block p, .seo-list li {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
+  /* Header */
   .header-tagline { display: none; }
   .header-divider { display: none; }
-  .footer-note    { display: none; }
+
+  /* Footer */
+  .footer-note { display: none; }
+  .footer-inner { padding: 14px 16px; }
 }
 
 /* =============================================
-   RESPONSIVE — Mobile small (≤ 400px)
+   RESPONSIVE — Small phones (≤ 420px)
    ============================================= */
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   :root { --header-h: 48px; }
 
   .app-shell { padding: 0 12px; }
+  .header    { padding: 0 12px; }
 
-  .header { padding: 0 14px; }
-  .logo-name { font-size: 14px; }
-  .status-badge { padding: 3px 8px; font-size: 11px; }
+  .logo-name    { font-size: 14px; }
+  .status-badge { padding: 3px 8px; font-size: 10.5px; }
 
   .workspace-title { font-size: 15px; }
+  .workspace-sub   { font-size: 12px; }
 
   .editor {
     height: 220px;
-    max-height: 38vh;
+    max-height: 36vh;
     font-size: 14.5px;
-    padding: 14px 14px 10px;
+    padding: 14px 12px 10px;
   }
-
   .editor-toolbar { padding: 8px 12px; }
   .toolbar-dot    { width: 8px; height: 8px; }
+  .editor-hint    { font-size: 10.5px; }
 
-  /* Single column stat rows on very small screens */
-  .stat-list { grid-template-columns: 1fr; }
+  .stat-icon  { width: 20px; height: 20px; }
+  .stat-name  { font-size: 12.5px; }
+  .stat-val   { font-size: 13px; }
+  .stat-sub   { font-size: 9px; }
 
-  .time-cards { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .time-card  { padding: 10px 10px 8px; }
+  .time-card       { padding: 10px 10px 8px; }
   .time-card-value { font-size: 16px; }
   .time-card-label { font-size: 9.5px; }
 
-  .btn { padding: 10px 12px; font-size: 13px; }
+  .btn { padding: 11px 10px; font-size: 13px; }
 
-  .seo-inner { padding: 24px 0 20px; gap: 18px; }
-  .seo-block h2 { font-size: 12.5px; }
+  .seo-inner    { padding: 24px 20px 20px; gap: 18px; }
+  .seo-block h2 { font-size: 13px; }
   .seo-block p, .seo-list li { font-size: 12px; }
 
-  .footer-inner { padding: 14px 12px; gap: 10px; }
+  .footer-inner { padding: 12px; gap: 8px; }
   .footer-copy  { font-size: 11px; }
 }

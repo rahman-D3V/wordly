@@ -1,6 +1,6 @@
 {
-  "name": "Wordly — Word Counter & Writing Assistant",
-  "short_name": "Wordly",
+  "name": "Draftly — Word Counter & Writing Assistant",
+  "short_name": "Draftly",
   "description": "Free online word counter, character counter, and reading time calculator.",
   "start_url": "/",
   "display": "standalone",

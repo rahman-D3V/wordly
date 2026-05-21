@@ -36,7 +36,7 @@ let saveTimer   = null;
 
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('wordly-theme', theme);
+  localStorage.setItem('draftly-theme', theme);
   // Sync browser chrome color
   const meta = document.getElementById('metaThemeColor');
   if (meta) meta.setAttribute('content', theme === 'dark' ? '#18181b' : '#18181b');
@@ -53,9 +53,9 @@ function toggleTheme() {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem('wordly-theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  setTheme(saved || (prefersDark ? 'dark' : 'light'));
+  // Always default to light mode — ignore system preference
+  const saved = localStorage.getItem('draftly-theme');
+  setTheme(saved || 'light');
 }
 
 // ── Stats ─────────────────────────────────────
@@ -175,7 +175,7 @@ function autoSave() {
   setSaveBadge('saving');
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => {
-    localStorage.setItem('wordly-draft', editor.value);
+    localStorage.setItem('draftly-draft', editor.value);
     setSaveBadge('saved');
     // Revert to "Ready" after 2s
     setTimeout(() => setSaveBadge(''), 2000);
@@ -183,7 +183,7 @@ function autoSave() {
 }
 
 function loadDraft() {
-  const draft = localStorage.getItem('wordly-draft');
+  const draft = localStorage.getItem('draftly-draft');
   if (draft) {
     editor.value = draft;
     updateStats();
@@ -220,7 +220,7 @@ function copyText() {
 function clearText() {
   if (!editor.value) return;
   editor.value = '';
-  localStorage.removeItem('wordly-draft');
+  localStorage.removeItem('draftly-draft');
   updateStats();
   setSaveBadge('');
   editor.focus();
